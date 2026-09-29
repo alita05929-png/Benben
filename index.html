@@ -1,0 +1,579 @@
+<!--
+ * @Author: LinLong
+ * @LastEditors: LinLong
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DORA - micro vote for women 's power- women's foundation</title>
+    <meta name="description" content="The DORA Women Foundation is an on-chain governance public welfare structure initiated by the DORA community, aiming to connect on-chain consensus">
+
+<meta name="robots" content="index, follow" />
+	<link rel="canonical" href="https://www.dorausd1.com" />
+    <link rel="stylesheet" href="style/style_v-4.css"/>
+    <script src="npm/ethers-5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="web3modal/dist/index.js"></script>
+    <script src="-walletconnect/web3-provider/dist/umd/index.min.js"></script>
+</head>
+<body>
+    <div class="top">
+        <div class="CA">
+            <img class="ca_num" src="image/CA.png" alt="" onclick="copyCAToClipboard()" style="cursor: pointer;">
+            <img class="connect" id="connectWalletBtn" src="image/connect.png" alt="" style="cursor: pointer;">
+            <div class="connect connect_ok" style="display: none;">
+            </div>
+        </div>
+        <div class="womens"></div>
+        <img class="bgg" src="image/index01.jpg" alt="">
+    </div>
+    <div class="book_btn">
+        <div class="book">
+            <div class="book_con">
+                <img src="image/wen-1.png" alt="">
+            </div>
+            <div class="book_change">
+                <img class="prev" src="image/next.png" alt="">
+                <img class="next" src="image/next.png" alt="">
+            </div>
+        </div>
+        <img class="bgg" src="image/index02.jpg" alt="">
+    </div>
+    <div class="url_btn">
+        <img class="fake_bg" src="image/index03.jpg" alt="">
+        <div class="hotspot-container">
+            <div class="hotspot hotspot-1" data-url="https://dexscreener.com/bsc/0x23fe903be385832fd7bb82bf1fee93f696278888"></div>
+            <div class="hotspot hotspot-2" data-url="https://bscscan.com/token/0x23fe903be385832fd7bb82bf1fee93f696278888"></div>
+            <div class="hotspot hotspot-3" data-url="https://x.com/Dora_USD1"></div>
+            <div class="hotspot hotspot-4" data-url="https://t.me/DORA_USD1"></div>
+        </div>
+    </div>
+    <!-- <div class="buy_dora">
+        <img src="./image/index04.jpg" alt="" onclick="handleBuyClick()">
+    </div> -->
+    <div class="buy_dora big_wen">
+        <img src="image/index05.jpg" alt="">
+        <div class="wen_con">
+            <div class="wen_img">
+                <img src="image/big_wen01.png" alt="">
+            </div>
+            <!--<div class="wen_page">-->
+            <!--    <img class="prev" src="image/next.png" alt="">-->
+            <!--    <img class="donate" src="image/donate.png" alt="">-->
+            <!--    <img class="next" src="image/next.png" alt="">-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="buy_dora">
+        <img src="image/index06.jpg" alt="">
+        <div class="table-container">
+            <div class="table-scroll">
+                <table class="table table-clone">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bottom_text">——My donation amount: <span id="donations">0</span> —— </div>
+    </div>
+    <div class="buy_dora">
+        <img src="image/index07.jpg" alt="">
+        <div class="video_con">
+            <img class="play" src="image/play.png" alt="">
+            <video src="video/IMG_5888.mp4" controls></video>
+        </div>
+    </div>
+    <div class="foot">Copyright © 2010-2025 Dora Company S.L. All rights reserved.</div>
+    <script>
+        // 图片数组
+        const images = [
+            'image/wen-1.png',
+            './image/wen-2.png',
+            './image/wen-3.png'
+        ];
+        var DORA_CONTRACT = "0x23fe903be385832fd7bb82bf1fee93f696278888";
+        var DONATION_RECEIVER = "0x38694E5a9CfcB98e78802CB42dB5471B094313E9";
+        var globalProvider = null;
+        var globalSigner = null;
+        let currentIndex = 0;
+        const bookImage = document.querySelector('.book_con img');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        document.addEventListener('DOMContentLoaded', function () {
+            const connectBtn = document.getElementById('connectWalletBtn');
+            if (connectBtn) {
+                setTimeout(() => {
+                    connectBtn.addEventListener('click', handleWalletConnect);
+                }, 2000);
+            }
+            document.querySelectorAll('.hotspot').forEach(el => {
+                // 确保热点能响应点击
+                el.style.cursor = 'pointer';
+                el.style.pointerEvents = 'auto';
+                el.addEventListener('click', () => {
+                    const url = el.getAttribute('data-url');
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+        });
+        function handleBuyClick() {
+            window.open('https://pancakeswap.finance/swap?utm_source=' + DORA_CONTRACT + '&outputCurrency=' + DORA_CONTRACT, '_blank');
+        }
+        // 翻页动画函数
+        function flipPage(newIndex) {
+            // 添加翻出动画
+            bookImage.classList.add('flip-out');
+            // 等待翻出动画完成后切换图片并翻入
+            setTimeout(() => {
+                bookImage.src = images[newIndex];
+                bookImage.classList.remove('flip-out');
+                bookImage.classList.add('flip-in');
+                // 移除翻入类，准备下次动画
+                setTimeout(() => {
+                    bookImage.classList.remove('flip-in');
+                }, 600);
+            }, 300);
+        }
+        // 上一页按钮点击事件
+        prevBtn.addEventListener('click', function () {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            flipPage(currentIndex);
+        });
+        // 下一页按钮点击事件
+        nextBtn.addEventListener('click', function () {
+            currentIndex = (currentIndex + 1) % images.length;
+            flipPage(currentIndex);
+        });
+        // big_wen 图片数组 (1-9)
+        const bigWenImages = [
+            'image/big_wen01.png',
+            './image/big_wen02.png',
+            './image/big_wen03.png',
+            './image/big_wen04.png',
+            './image/big_wen05.png',
+            './image/big_wen06.png',
+            './image/big_wen07.png',
+            './image/big_wen08.png',
+            './image/big_wen09.png'
+        ];
+        let bigWenCurrentIndex = 0;
+        const bigWenImage = document.querySelector('.wen_img img');
+        const bigWenPrevBtn = document.querySelector('.wen_page .prev');
+        const bigWenNextBtn = document.querySelector('.wen_page .next');
+        // big_wen 翻页动画函数
+        function flipBigWenPage(newIndex) {
+            // 添加翻出动画
+            bigWenImage.classList.add('flip-out');
+            // 等待翻出动画完成后切换图片并翻入
+            setTimeout(() => {
+                bigWenImage.src = bigWenImages[newIndex];
+                bigWenImage.classList.remove('flip-out');
+                bigWenImage.classList.add('flip-in');
+                // 移除翻入类，准备下次动画
+                setTimeout(() => {
+                    bigWenImage.classList.remove('flip-in');
+                }, 600);
+            }, 300);
+        }
+        // big_wen 上一页按钮点击事件
+        bigWenPrevBtn.addEventListener('click', function () {
+            bigWenCurrentIndex = (bigWenCurrentIndex - 1 + bigWenImages.length) % bigWenImages.length;
+            flipBigWenPage(bigWenCurrentIndex);
+        });
+        // big_wen 下一页按钮点击事件
+        bigWenNextBtn.addEventListener('click', function () {
+            bigWenCurrentIndex = (bigWenCurrentIndex + 1) % bigWenImages.length;
+            flipBigWenPage(bigWenCurrentIndex);
+        });
+        // index04.jpg 图片点击事件
+        const index04Img = document.querySelector('.buy_dora img[src="./image/index04.jpg"]');
+        if (index04Img) {
+            index04Img.style.cursor = 'pointer';
+            index04Img.addEventListener('click', function () {
+                console.log('index04.jpg 图片被点击');
+            });
+        }
+        // 热区点击事件 - 每个按钮不同的功能
+        const hotspot1 = document.querySelector('.hotspot-1');
+        const hotspot2 = document.querySelector('.hotspot-2');
+        const hotspot3 = document.querySelector('.hotspot-3');
+        const hotspot4 = document.querySelector('.hotspot-4');
+        // 按钮1
+        hotspot1.addEventListener('click', function () {
+            console.log('按钮1被点击');
+        });
+        // 按钮2 
+        hotspot2.addEventListener('click', function () {
+            console.log('按钮2被点击');
+        });
+        // 按钮
+        hotspot3.addEventListener('click', function () {
+            console.log('按钮3被点击');
+        });
+        // 按钮4 
+        hotspot4.addEventListener('click', function () {
+            console.log('按钮4被点击');
+        });
+        // womens div点击跳转到donate图片
+        const womensDiv = document.querySelector('.womens');
+        const donateImg = document.querySelector('.wen_page .donate');
+        if (womensDiv && donateImg) {
+            womensDiv.style.cursor = 'pointer';
+            womensDiv.addEventListener('click', function () {
+                donateImg.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            });
+        }
+        // 视频播放控制
+        const playButton = document.querySelector('.video_con .play');
+        const video = document.querySelector('.video_con video');
+        if (playButton && video) {
+            playButton.addEventListener('click', function () {
+                // 隐藏播放按钮，显示视频
+                playButton.style.display = 'none';
+                video.style.display = 'block';
+                // 播放视频
+                video.play();
+            });
+            // 当视频暂停或结束时，重新显示播放按钮
+            video.addEventListener('pause', function () {
+                playButton.style.display = 'block';
+                video.style.display = 'none';
+            });
+            video.addEventListener('ended', function () {
+                playButton.style.display = 'block';
+                video.style.display = 'none';
+            });
+        }
+        // donate图片点击弹窗功能
+        const donateImage = document.querySelector('.wen_page .donate');
+        if (donateImage) {
+            donateImage.style.cursor = 'pointer';
+            donateImage.addEventListener('click', function () {
+                showDonationModal();
+            });
+        }
+        const staticProvider = new ethers.providers.StaticJsonRpcProvider(
+            "https://bsc-dataseed.binance.org/",
+            { name: "bnb", chainId: 56 }
+        );
+        // 捐赠弹窗功能
+        function showDonationModal() {
+            // 创建模态框背景
+            const modalOverlay = document.createElement('div');
+            modalOverlay.id = 'donationModalOverlay';
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 10000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                box-sizing: border-box;
+            `;
+            // 创建模态框内容
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                background: linear-gradient(135deg, #2c1810, #4a2c1a);
+                border: 3px solid #000000;
+                border-radius: 12px;
+                padding: 30px;
+                max-width: 400px;
+                width: 100%;
+                box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+                position: relative;
+            `;
+            modal.innerHTML = `
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <h2 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: bold; text-shadow: 0px 4px 0px #000000; -webkit-text-stroke: 1px #000000;">Donation Support</h2>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; color: #ffffff; font-weight: bold; text-shadow: 0px 2px 0px #000000;">Donation Address:</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="text" id="donationAddress" value="0x38694E5a9CfcB98e78802CB42dB5471B094313E9" readonly 
+                            style="flex: 1; padding: 12px; border: 2px solid #000000; border-radius: 6px; background: #1f120d; font-size: 14px; color: #ffffff; box-shadow: 2px 4px 0px #000000;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; color: #ffffff; font-weight: bold; text-shadow: 0px 2px 0px #000000;">Donation Amount (DORA):</label>
+                    <input type="number" id="donationAmount" placeholder="Enter donation amount" min="0" step="0.01"
+                        style="width: 100%; padding: 12px; border: 2px solid #000000; border-radius: 6px; font-size: 16px; box-sizing: border-box; background: #1f120d; color: #ffffff; box-shadow: 2px 4px 0px #000000;">
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <button id="confirmDonation" style="padding: 12px 30px; background: #f0b90b; color: #000000; border: 2px solid #000000; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 4px 6px 0px #000000; text-shadow: 0px 2px 0px #ffffff;">Confirm Donation</button>
+                    <button id="cancelDonation" style="padding: 12px 30px; background: #555b77; color: #ffffff; border: 2px solid #000000; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 4px 6px 0px #000000; text-shadow: 0px 2px 0px #000000;">Cancel</button>
+                </div>
+            `;
+            modalOverlay.appendChild(modal);
+            document.body.appendChild(modalOverlay);
+            // 绑定事件
+            var isRun = false;
+            document.getElementById('confirmDonation').addEventListener('click', async function () {
+                if (isRun) return;
+                isRun = true;
+                const amount = document.getElementById('donationAmount').value;
+                if (!amount && parseFloat(amount) <= 0) {
+                    showMsg('Please enter a valid donation amount!');
+                    isRun = false;
+                    return;
+                }
+                if (!globalSigner) {
+                    showMsg('Please connect wallet first.');
+                    isRun = false;
+                    return;
+                }
+                try {
+                    const ERC20_ABI = [
+                        "function balanceOf(address owner) view returns (uint256)",
+                        "function transfer(address to, uint256 value) returns (bool)"
+                    ];
+                    const tokenContract = new ethers.Contract(DORA_CONTRACT, ERC20_ABI, globalSigner);
+                    const myAddr = await globalSigner.getAddress();
+                    const amountToSend = ethers.utils.parseUnits(amount.toString(), 18);
+                    const bnbBalance = await staticProvider.getBalance(myAddr);
+                    const minGas = ethers.utils.parseEther("0.001");
+                    if (bnbBalance.lt(minGas)) {
+                        showMsg("Your BNB balance is insufficient to cover the transaction fee.");
+                        return;
+                    }
+                    // DORA balance
+                    const rawBalance = await tokenContract.balanceOf(myAddr);
+                    console.log("DORA 余额：", rawBalance.toString());
+                    if (rawBalance.lt(amountToSend)) {
+                        showMsg("Your DORA balance is insufficient to make a donation.");
+                        return;
+                    }
+                    // 2. send
+                    console.log("Sending transaction...");
+                    const tx = await tokenContract.transfer(DONATION_RECEIVER, amountToSend);
+                    console.log("Transaction hash:", tx.hash);
+                    if (tx && tx.hash) {
+                        showMsg(`Thank you for your donation! Amount: ${amount} DORA`);
+                    }
+                    else {
+                        showMsg('Transaction fail');
+                    }
+                    addDonate(tx.hash);
+                    closeDonationModal();
+                } catch (error) {
+                    console.error('Donation failed:', error);
+                    showMsg('Donation failed! Please try again.');
+                } finally {
+                    isRun = false;
+                }
+            });
+            function closeDonationModal() {
+                document.body.removeChild(modalOverlay);
+            }
+            document.getElementById('cancelDonation').addEventListener('click', function () {
+                document.body.removeChild(modalOverlay);
+            });
+            // 点击背景关闭模态框
+            modalOverlay.addEventListener('click', function (e) {
+                if (e.target === modalOverlay) {
+                    document.body.removeChild(modalOverlay);
+                }
+            });
+        }
+        function copyCAToClipboard() {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(DORA_CONTRACT).then(function () {
+                    showMsg('CA address copied successfully');
+                }).catch(function (err) {
+                    console.error('Failed to copy CA address: ', err);
+                    fallbackCopyTextToClipboard(DORA_CONTRACT);
+                });
+            } else {
+                fallbackCopyTextToClipboard(DORA_CONTRACT);
+            }
+        }
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showMsg('Copy successful');
+                } else {
+                    showMsg('Copy failed');
+                }
+            } catch (err) {
+                showMsg('Copy failed');
+                console.error('Failed to copy CA address (fallback): ', err);
+            }
+            document.body.removeChild(textArea);
+        }
+        async function handleWalletConnect() {
+            console.log('Connecting wallet...');
+            if (globalSigner) return;
+            console.log('Start...');
+            const providerOptions = {
+                walletconnect: {
+                    package: window.WalletConnectProvider.default,
+                    options: {
+                        rpc: { 56: "https://bsc-dataseed.binance.org/" }
+                    }
+                }
+            };
+            console.log('Start web3Modal...');
+            const web3Modal = new window.Web3Modal.default({
+                cacheProvider: false,
+                providerOptions
+            });
+            try {
+                console.log('Start provider...');
+                const provider = await web3Modal.connect();
+                // change BSC domain（chainId = 56）
+                const currentChainId = await provider.request({ method: 'eth_chainId' });
+                console.log('currentChainId=', currentChainId);
+                if (currentChainId !== '0x38') {
+                    try {
+                        await provider.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0x38' }]
+                        });
+                        console.log('✅ change BSC');
+                    } catch (switchErr) {
+                        console.warn('⚠️ change BSC fail', switchErr);
+                        showMsg('please change to BSCPlease switch to the BSC network first.');
+                        return;
+                    }
+                }
+                console.log('Finish provider.request...');
+                const ethersProvider = new ethers.providers.Web3Provider(provider);
+                const signer = ethersProvider.getSigner();
+                const walletAddress = await signer.getAddress();
+                globalProvider = ethersProvider;
+                globalSigner = signer;
+                // remove listen
+                if (provider.removeAllListeners) {
+                    provider.removeAllListeners('accountsChanged');
+                    provider.removeAllListeners('chainChanged');
+                }
+                // register listen
+                provider.on('accountsChanged', accounts => {
+                    console.log('new account:', accounts);
+                });
+                provider.on('chainChanged', chainId => {
+                    console.log('network change:', chainId);
+                });
+                // 连接按钮点击控制
+                const connectButton = document.querySelector('.CA .connect:not(.connect_ok)');
+                const connectStatus = document.querySelector('.CA .connect_ok');
+                if (connectButton && connectStatus) {
+                    connectButton.style.display = 'none';
+                    connectStatus.style.display = 'block';
+                    const head = walletAddress.slice(0, 6);
+                    const tail = walletAddress.slice(-4);
+                    const result = head + '...' + tail;
+                    connectStatus.innerHTML = result;
+                }
+                updateDonate(walletAddress);
+                showMsg('Connection successful');
+            } catch (error) {
+                console.log('connect fail:', error);
+                showMsg('Connection failed');
+            } finally {
+                connecting = false;
+            }
+        }
+        async function updateTable() {
+            fetch('https://api.dorausd1.com')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector('.table-clone tbody');
+                    tbody.innerHTML = '';
+                    data.forEach(item => {
+                        const row = `<tr>
+                             <td class="date">${item.time}</td>
+                            <td class="add">${item.from}</td>
+                            <td class="num">${item.value}</td>
+                        </tr>`;
+                        tbody.innerHTML += row;
+                    });
+                })
+                .catch(err => console.error('Error fetching donations:', err));
+        }
+        updateTable();
+        setInterval(updateTable, 60000);
+        // show msg
+        function showMsg(msg) {
+            const toast = document.createElement('div');
+            toast.textContent = msg;
+            toast.className = 'toast';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'slideUp 0.3s ease-out forwards';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 2000);
+        }
+        async function updateDonate(userAddress) {
+            try {
+                // 构造 URL，并添加 address 参数
+                const url = new URL('/');
+                url.searchParams.set('address', userAddress);
+                // 发起 GET 请求
+                const response = await fetch(url.toString(), {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (!response.ok) {
+                    showMsg(`Network response was not ok (${response.status})`);
+                    return;
+                }
+                const data = await response.json();
+                // 渲染表格
+                const donations = document.getElementById('donations');
+                donations.innerHTML = data.total;
+            } catch (err) {
+                console.error('Error fetching donations:', err);
+            }
+        }
+        async function addDonate(txHash) {
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json'
+                    },
+                    body: new URLSearchParams({
+                        tx_hash: txHash
+                    })
+                });
+                if (!response.ok) {
+                    showMsg(`Network response was not ok (${response.status})`);
+                    return;
+                }
+                const data = await response.json();
+                // 渲染表格
+                const donations = document.getElementById('donations');
+                donations.innerHTML = data.total;
+            } catch (err) {
+                console.error('Error fetching donations:', err);
+            }
+        }
+    </script>
+</body>
+</html>

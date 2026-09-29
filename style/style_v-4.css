@@ -1,0 +1,419 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	box-sizing: border-box;
+	font-size: 0;
+}
+body {
+	background-color: rgb(31, 18, 13);
+	/* background-image: url('https://www.dorausd1.com/image/bg.jpg'); */
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+
+.top {
+	position: relative;
+}
+.top .bgg {
+	width: 100%;
+	height: auto;
+}
+.CA {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 2vw;
+	position: absolute;
+	z-index: 1;
+}
+/* .CA .ca_num {
+	width: 48.6%;
+	height: auto;
+} */
+.CA .ca_num {
+	width: 80%;
+	height: auto;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+.CA .ca_num:hover {
+	transform: scale(1.05);
+	filter: brightness(1.1);
+}
+.CA .ca_num:active {
+	transform: scale(0.95);
+}
+
+.CA .connect {
+	width: 9.9vw;
+	height: auto;
+	align-self: flex-start;
+	margin-top: 3.5vh;
+	cursor: pointer;
+	transform: scale(1.5);
+}
+.connect_ok {
+	/* background-image: url('https://www.dorausd1.com/image/connect1.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto; */
+	font-size: 1.8vw;
+	font-weight: 600;
+	color: #fff;
+	height: auto;
+	align-self: flex-start;
+	text-align: center;
+	padding: 0.5vw;
+	display: none;
+	margin-top: 2.63vh !important;
+	box-shadow: 1.94px 4.35px 0px #000000;
+	background: linear-gradient(1deg, rgba(0, 77, 255, 1) 0%, rgba(81, 249, 255, 1) 100%);
+	line-height: 2.6vw;
+	border-radius: 1000vw;
+	transform: scale(1.1) !important;
+	width: 16vw !important;
+}
+
+.womens {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 20vw;
+	height: 10vh;
+	/* background: rgba(255, 255, 255, 0.1);
+	border: 2px solid rgba(255, 255, 255, 0.3); */
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	z-index: 10;
+	width: 30%;
+	height: 10%;
+	top: 77%;
+	left: 50%;
+	position: absolute;
+}
+
+.book_btn {
+	width: 100%;
+	position: relative;
+
+	/* padding: 4.63vh 0; */
+	/* z-index: 3;
+	display: flex;
+	flex-direction: column;
+	justify-content: center; */
+}
+.book_btn .bgg {
+	width: 100%;
+	height: auto;
+}
+
+.book {
+	/* background-image: url('https://www.dorausd1.com/image/book.png');
+	background-repeat: no-repeat;
+	background-size: 80% auto;
+	background-position: top center; */
+	width: 35%;
+	position: absolute;
+	top: 10%;
+	left: 32%;
+	height: 88%;
+	/* background: #000; */
+}
+.book_con {
+	width: 100%;
+	height: 84%;
+}
+.book_con img {
+	width: 100%;
+	height: auto;
+	transition: transform 0.6s ease-in-out;
+	transform-style: preserve-3d;
+}
+
+/* 翻页动画效果 */
+.book_con img.flip-out {
+	transform: rotateY(-90deg);
+}
+
+.book_con img.flip-in {
+	transform: rotateY(0deg);
+}
+.book_change {
+	display: flex;
+	justify-content: center;
+	gap: 10.42vw;
+	/* margin-top: 10.26vh; */
+}
+.book_change img {
+	width: 10%;
+	height: auto;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+.prev {
+	transform: rotate(180deg);
+}
+
+.url_btn {
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+.url_btn .fake_bg {
+	width: 100%;
+	height: auto;
+}
+/* 热区样式 */
+.hotspot-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/* pointer-events: none; */
+}
+
+.hotspot {
+	position: absolute;
+	cursor: pointer;
+	/* pointer-events: auto; */
+	transition: all 0.3s ease;
+	border-radius: 0.42vw;
+	/* border: 0.1vw solid rgba(255, 255, 255, 0.5); */
+}
+
+/* 根据btn_url.png图片中按钮的实际位置调整这些值 */
+.hotspot-1 {
+	top: 9%;
+	left: 36%;
+	width: 53%;
+	height: 13%;
+}
+
+.hotspot-2 {
+	top: 25%;
+	right: 10%;
+	width: 54%;
+	height: 14%;
+}
+
+.hotspot-3 {
+	bottom: 43%;
+	left: 37%;
+	width: 52%;
+	height: 13%;
+}
+
+.hotspot-4 {
+	bottom: 24%;
+	right: 10%;
+	width: 54%;
+	height: 16%;
+}
+.buy_dora {
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+.buy_dora img {
+	width: 100%;
+	height: auto;
+	cursor: pointer;
+}
+.wen_con {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.wen_img {
+	padding: 13% 7% 0% 33%;
+}
+.wen_img img {
+	width: 100%;
+	height: auto;
+	transition: transform 0.6s ease-in-out;
+	transform-style: preserve-3d;
+}
+
+/* big_wen 翻页动画效果 */
+.wen_img img.flip-out {
+	transform: rotateY(-90deg);
+}
+
+.wen_img img.flip-in {
+	transform: rotateY(0deg);
+}
+.wen_page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 3.6vw;
+	padding-left: 20%;
+	padding-top: 3.63vh;
+}
+.wen_page .prev {
+	transform: rotate(180deg);
+}
+.wen_page .prev,
+.wen_page .next {
+	width: 3.6vw;
+}
+.wen_page .donate {
+	width: 15.46vw;
+}
+.table-container {
+	position: absolute;
+	left: 18%;
+	top: 31%;
+	color: #555b77;
+	font-weight: Bold;
+	width: 61%;
+	height: 45%;
+	overflow: hidden;
+}
+
+.table-scroll {
+	width: 100%;
+	height: auto;
+	animation: scrollUp 10s linear infinite;
+}
+
+.table-scroll:hover {
+	animation-play-state: paused;
+}
+
+.table-clone {
+	margin-top: 0;
+}
+
+@keyframes scrollUp {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-50%);
+	}
+}
+
+.table {
+	width: 100%;
+	height: 100%;
+}
+.table tr {
+	width: 100%;
+}
+
+.table tr td {
+	text-align: center;
+	font-size: 15px;
+	height: 30px;
+	padding: 5px 0;
+}
+
+/* 移动端样式 */
+@media (max-width: 768px) {
+	.table tr td {
+		font-size: 9px;
+	}
+	.video_con .play {
+		width: 11.2vw;
+	}
+	.CA .connect {
+		margin-top: 1vh;
+	}
+	.connect_ok {
+		margin-top: 1vh;
+	}
+}
+
+.womens {
+	/* border: 0.1vw solid rgba(255, 255, 255, 0.5); */
+	width: 30%;
+	height: 10%;
+	top: 77%;
+	left: 50%;
+	position: absolute;
+}
+.date {
+	width: 30%;
+}
+.add {
+	width: 40%;
+	/* text-align: center !important;
+	padding-right: 12% !important; */
+}
+.num {
+	width: 30%;
+}
+.bottom_text {
+	position: absolute;
+	left: 18%;
+	bottom: 20%;
+	color: #000000;
+	font-weight: Bold;
+	width: 61%;
+	height: 4%;
+	overflow: hidden;
+	font-size: 1.5vw;
+	text-align: center;
+	line-height: 2.5vw;
+}
+.bottom_text span {
+	color: #f7b02b;
+	font-size: 1.5vw;
+}
+.video_con {
+	position: absolute;
+	top: 22%;
+	left: 30%;
+	width: 43%;
+	height: 55%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.video_con .play {
+	position: absolute;
+	width: 5.2vw;
+	height: auto;
+	z-index: 10;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	opacity: 0.8;
+}
+
+.video_con .play:hover {
+	transform: scale(1.1);
+	opacity: 1;
+}
+
+.video_con video {
+	width: 100%;
+	height: 100%;
+	border-radius: 1vw;
+	display: none;
+	object-fit: cover;
+}
+
+.toast {
+	display: inline-block; /* 自动撑开，包裹文字 */
+	white-space: nowrap; /* 不换行 */
+	font-size: 1.8vw; /* 恢复一个合适的字体大小 */
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: linear-gradient(135deg, #f0b90b, #ffd700);
+	color: #000;
+	padding: 12px 24px;
+	border-radius: 25px;
+	font-weight: bold;
+	z-index: 10000;
+	box-shadow: 0 4px 15px rgba(240, 185, 11, 0.4);
+	animation: slideDown 0.3s ease-out;
+}
