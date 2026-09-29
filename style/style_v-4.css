@@ -6,8 +6,7 @@
 	font-size: 0;
 }
 body {
-	background-color: rgb(31, 18, 13);
-	/* background-image: url('https://www.dorausd1.com/image/bg.jpg'); */
+	background-color: #120808;
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 }
@@ -67,7 +66,7 @@ body {
 	display: none;
 	margin-top: 2.63vh !important;
 	box-shadow: 1.94px 4.35px 0px #000000;
-	background: linear-gradient(1deg, rgba(0, 77, 255, 1) 0%, rgba(81, 249, 255, 1) 100%);
+	background: linear-gradient(1deg, #7a1010 0%, #f0b90b 100%);
 	line-height: 2.6vw;
 	border-radius: 1000vw;
 	transform: scale(1.1) !important;
@@ -184,33 +183,33 @@ body {
 	/* border: 0.1vw solid rgba(255, 255, 255, 0.5); */
 }
 
-/* 根据btn_url.png图片中按钮的实际位置调整这些值 */
+/* 犇犇 links panel hotspots (DexScreener / BSCScan / X / Telegram) */
 .hotspot-1 {
-	top: 9%;
-	left: 36%;
-	width: 53%;
-	height: 13%;
+	top: 28%;
+	left: 28%;
+	width: 44%;
+	height: 10%;
 }
 
 .hotspot-2 {
-	top: 25%;
-	right: 10%;
-	width: 54%;
-	height: 14%;
+	top: 40%;
+	left: 28%;
+	width: 44%;
+	height: 10%;
 }
 
 .hotspot-3 {
-	bottom: 43%;
-	left: 37%;
-	width: 52%;
-	height: 13%;
+	top: 52%;
+	left: 28%;
+	width: 44%;
+	height: 10%;
 }
 
 .hotspot-4 {
-	bottom: 24%;
-	right: 10%;
-	width: 54%;
-	height: 16%;
+	top: 64%;
+	left: 28%;
+	width: 44%;
+	height: 10%;
 }
 .buy_dora {
 	width: 100%;
@@ -401,9 +400,9 @@ body {
 }
 
 .toast {
-	display: inline-block; /* 自动撑开，包裹文字 */
-	white-space: nowrap; /* 不换行 */
-	font-size: 1.8vw; /* 恢复一个合适的字体大小 */
+	display: inline-block;
+	white-space: nowrap;
+	font-size: 1.8vw;
 	position: fixed;
 	top: 20px;
 	left: 50%;
@@ -416,4 +415,27 @@ body {
 	z-index: 10000;
 	box-shadow: 0 4px 15px rgba(240, 185, 11, 0.4);
 	animation: slideDown 0.3s ease-out;
+}
+
+.foot {
+	text-align: center;
+	padding: 2.5vw 1vw 3vw;
+	color: #f0b90b;
+	font-size: 1.2vw;
+	font-weight: 600;
+	background: #0a0404;
+}
+
+.foot a {
+	color: #ffd700;
+	font-size: inherit;
+	text-decoration: none;
+}
+
+.foot a:hover {
+	text-decoration: underline;
+}
+
+.table tr td {
+	color: #f0d78c;
 }
