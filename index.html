@@ -43,11 +43,11 @@
     </div>
     <div class="url_btn">
         <img class="fake_bg" src="image/index03.jpg" alt="Join the Charge">
-        <div class="hotspot-container">
-            <div class="hotspot hotspot-1" data-url="https://dexscreener.com/bsc/0x2720d5573b4f20a62ce145772cf4e6992a7dc246"></div>
-            <div class="hotspot hotspot-2" data-url="https://bscscan.com/token/0x2720d5573b4f20a62ce145772cf4e6992a7dc246"></div>
-            <div class="hotspot hotspot-3" data-url="https://x.com/benbenbnb"></div>
-            <div class="hotspot hotspot-4" data-url="https://t.me/benbenonbnb"></div>
+        <div class="link-panel">
+            <a class="link-btn" href="https://dexscreener.com/bsc/0x2720d5573b4f20a62ce145772cf4e6992a7dc246" target="_blank" rel="noopener">DexScreener</a>
+            <a class="link-btn" href="https://bscscan.com/token/0x2720d5573b4f20a62ce145772cf4e6992a7dc246" target="_blank" rel="noopener">BSCScan</a>
+            <a class="link-btn" href="https://x.com/benbenbnb" target="_blank" rel="noopener">X / Twitter</a>
+            <a class="link-btn" href="https://t.me/benbenonbnb" target="_blank" rel="noopener">Telegram</a>
         </div>
     </div>
     <div class="buy_dora big_wen">
@@ -170,10 +170,6 @@
                 flipBigWenPage(bigWenCurrentIndex);
             });
         }
-        const hotspot1 = document.querySelector('.hotspot-1');
-        const hotspot2 = document.querySelector('.hotspot-2');
-        const hotspot3 = document.querySelector('.hotspot-3');
-        const hotspot4 = document.querySelector('.hotspot-4');
         const womensDiv = document.querySelector('.womens');
         const donateImg = document.querySelector('.wen_page .donate');
         if (womensDiv && donateImg) {
