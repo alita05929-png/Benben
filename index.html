@@ -71,10 +71,9 @@
         <div class="bottom_text">—— My 犇犇 amount: <span id="donations">0</span> —— </div>
     </div>
     <div class="buy_dora">
-        <img src="image/index07.jpg" alt="Watch 犇犇 Charge">
+        <img src="image/index07.jpg" alt="犇犇 Charge">
         <div class="video_con">
-            <img class="play" src="image/play.png" alt="Play">
-            <video src="video/IMG_5888.mp4" controls></video>
+            <img class="feature_shot" src="image/banner.png" alt="犇犇 — Born to Charge. Built on BNB">
         </div>
     </div>
     <div class="foot">Copyright © 2026 犇犇 · Built on BNB · <a href="https://x.com/benbenbnb" target="_blank" rel="noopener">@benbenbnb</a></div>
@@ -179,23 +178,6 @@
                     behavior: 'smooth',
                     block: 'center'
                 });
-            });
-        }
-        const playButton = document.querySelector('.video_con .play');
-        const video = document.querySelector('.video_con video');
-        if (playButton && video) {
-            playButton.addEventListener('click', function () {
-                playButton.style.display = 'none';
-                video.style.display = 'block';
-                video.play();
-            });
-            video.addEventListener('pause', function () {
-                playButton.style.display = 'block';
-                video.style.display = 'none';
-            });
-            video.addEventListener('ended', function () {
-                playButton.style.display = 'block';
-                video.style.display = 'none';
             });
         }
         const donateImage = document.querySelector('.wen_page .donate');

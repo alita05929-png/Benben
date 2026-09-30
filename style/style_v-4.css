@@ -325,9 +325,6 @@ body {
 	.table tr td {
 		font-size: 9px;
 	}
-	.video_con .play {
-		width: 11.2vw;
-	}
 	.CA .connect {
 		margin-top: 1vh;
 	}
@@ -381,29 +378,18 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
+	border-radius: 1vw;
 }
 
-.video_con .play {
-	position: absolute;
-	width: 5.2vw;
-	height: auto;
-	z-index: 10;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	opacity: 0.8;
-}
-
-.video_con .play:hover {
-	transform: scale(1.1);
-	opacity: 1;
-}
-
-.video_con video {
+.video_con .feature_shot {
 	width: 100%;
 	height: 100%;
-	border-radius: 1vw;
-	display: none;
 	object-fit: cover;
+	border-radius: 1vw;
+	display: block;
+	cursor: default;
+	box-shadow: 0 0 1.5vw rgba(240, 185, 11, 0.35);
 }
 
 .toast {
