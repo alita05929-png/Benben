@@ -245,6 +245,56 @@ body {
 	transform-style: preserve-3d;
 }
 
+.bio-panel {
+	position: absolute;
+	left: 8%;
+	bottom: 6%;
+	width: 84%;
+	padding: 1.6vw 2vw;
+	background: rgba(18, 6, 6, 0.82);
+	border: 0.18vw solid #f0b90b;
+	border-radius: 1vw;
+	box-shadow: 0 0 1.2vw rgba(240, 185, 11, 0.25);
+	color: #ffe9a8;
+	z-index: 4;
+}
+
+.bio-panel h2 {
+	margin: 0 0 0.8vw;
+	color: #f0b90b;
+	font-size: 2.2vw;
+	font-weight: 800;
+	letter-spacing: 0.02em;
+}
+
+.bio-panel p {
+	margin: 0 0 0.7vw;
+	font-size: 1.15vw;
+	line-height: 1.55;
+	font-weight: 600;
+	color: #fff3d0;
+}
+
+.bio-panel p:last-child {
+	margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+	.bio-panel {
+		left: 5%;
+		width: 90%;
+		bottom: 4%;
+		padding: 2.4vw 3vw;
+	}
+	.bio-panel h2 {
+		font-size: 3.6vw;
+	}
+	.bio-panel p {
+		font-size: 2.4vw;
+		line-height: 1.45;
+	}
+}
+
 /* big_wen 翻页动画效果 */
 .wen_img img.flip-out {
 	transform: rotateY(-90deg);
